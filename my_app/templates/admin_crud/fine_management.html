@@ -1,0 +1,20 @@
+<!-- fine_management.html -->
+<h1>Fine Management</h1>
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Overdue Fine</th>
+            <th>Paid Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fine in fines %}
+        <tr>
+            <td>{{ fine.user.username }}</td>
+            <td>{{ fine.amount }}</td>
+            <td>{% if fine.paid %} Paid {% else %} Unpaid {% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

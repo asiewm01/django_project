@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Silent Library</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="index" type="text/js" href="JS/index.js" />
+    <link rel="stylesheet" type="text/css" href="CSS/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css" />
+    <title>jQuery UI Accordion - No auto height</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#accordion" ).accordion({
+      heightStyle: "content"
+    });
+  } );
+  </script>
+    <script>
+      $( function() {
+        $( ".widget input[type=submit], .widget a, .widget button" ).button();
+        $( "button, input, a" ).on( "click", function( event ) {
+          event.preventDefault();
+        } );
+      } );
+      </script>
+    </head>
+  </head>
+  <body>
+    <div class="header">
+      <div class="row align-items-start">  
+        <div class="col-sm-2">  
+        <img class="logo" src="Image/logo.jpg" alt="logo">   
+        </div>
+        <div class="col-sm-10">  
+        <h3 class="brandname">Silent Library</h3>
+        </div>
+      </div>
+</div>  
+  
+
+    <div class="topnav" id="myTopnav">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html" class="navigation">About us</a>
+      <a href="catalogue.html" class="navigation">Catalogue</a>
+      <a href="events.html" class="navigation">Events</a>
+      <a href="service.html" class="navigation">Service</a>
+      <a href="contact us.html" class="navigation">Contact Us</a>
+      <div class="search-container">
+        <form action="/action_page.php">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>   
+    <div class="container-fluid p-5 bg-primary text-white text-center">
+      <h1 class="mb-1">Site Map</h1>
+      <p class="mb-1">Welcome to the Silent Library sitemap. This page is your guide to navigating the website with ease. Whether you're looking for episodes, casting information, merchandise, or fan engagement, the sitemap provides a clear overview of every section.</p>
+      <p class="mb-1">Explore each page to find exactly what you need, from show updates to media resources, and dive deeper into the world of Silent Library.
+
+      </p> </p>
+    </div>
+
+<div class = "container bg-body-tertiary">
+    <hr class="dotted" style="border: 0px;"> 
+
+<div id="accordion">
+  <h3>About Us</h3>
+  <div>
+    <p>If you want to find out more about our value, mission and vision. You are more than welcome to know more about us.</p>
+    <div class="widget">
+      <a href="about.html" class="btn btn-primary text-white">Click here</a>
+    </div>
+  </div>
+  <h3>Services</h3>
+  <div>
+    <p>We provide a range of service such as recent update, equipment loans, book reservation, venue booking and registration for class and activity.</p>
+    <div class="widget">
+      <a href="service.html" class="btn btn-primary text-white">Click here</a>
+    </div>
+  </div>
+  <h3>Events</h3>
+  <div>
+    <p>No matter if it is christmas, chinese new year, labour days, children days or holloween. We often have activity and events to keep our visitors engage</p>
+    <div class="widget">
+      <a href="events.html" class="btn btn-primary text-white">Click here</a>
+    </div>
+  </div>
+  <h3>Catalogue</h3>
+  <div>
+    <p>We do not only loan books to our visitors. We also have a list of other library collectibles such as laptop, journal article, musical collection.</p>
+    <div class="widget">
+      <a href="catalogue.html" class="btn btn-primary text-white">Click here</a>
+    </div>
+  </div>
+  <h3>Contact Us</h3>
+  <div>
+    <p>Whether you have questions, feedback, or want to participate in the event, you can get in touch with us by email, telephone number or through the website.</p>
+    <div class="widget">
+      <a href="contact us.html" class="btn btn-primary text-white">Click here</a>
+    </div>
+  </div>
+</div>
+<hr class="dotted" style="border: 0px;"> 
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</div>
+ <!-- Site footer -->
+ <footer class="site-footer bg-secondary" style="margin-top: 5px;">
+  <div class="container">
+    <div class="row">
+      <hr class="dotted" style="border: 0px;"> 
+      <div class="col-sm-12 col-md-6">
+        <h6 style="color: white;">About</h6>
+        <p class="text-justify" style="color: white;">At Silent Haven Libraries, we believe that the power of knowledge is best unlocked in the stillness of a peaceful environment. Step into a sanctuary where every page turn is a whisper, and every thought finds its space to breathe.</p>
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <h6 style="color: white;">Categories</h6>
+        <ul class="footer-links">
+          <li style="color: white;"><a href="about.html" style="color: white;">About Us</a></li>
+          <li><a href="contact us.html" style="color: white;">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <h6 style="color: white;">Quick Links</h6>
+        <ul class="footer-links">
+          <li><a href="privacy policy.html" style="color: white;">Privacy Policy</a></li>
+          <li><a href="sitemap.html" style="color: white;">Sitemap</a></li>
+          <li><a href="term and condition.html" style="color: white;">Term & Condition</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text" style="color: white;">Copyright &copy; 2017 All Rights Reserved by 
+    <u>Silent Library</u>.
+        </p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a></li>
+          <li><a class="youtube" href="https://www.youtube.com/"><i class="fa fa-youtube"></i></a></li>
+          <li><a class="linkedin" href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>   
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+</div>  
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+Signup Success
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Internal CSS for Signup Success Page */
+    .signup-success-container {
+        max-width: 600px;
+        margin: 50px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .signup-success-container h1 {
+        font-size: 2.5rem;
+        color: #28a745;
+        margin-bottom: 15px;
+    }
+
+    .signup-success-container p {
+        font-size: 1.2rem;
+        color: #555;
+    }
+
+    .signup-success-container a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .signup-success-container a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="signup-success-container">
+    <h1>Signup Successful!</h1>
+    <p>You will be redirected to your dashboard shortly.</p>
+    <p>If not redirected, <a href="{% url 'user_dashboard' %}">click here</a>.</p>
+</div>
+
+<script>
+    // Automatically redirect to the dashboard after 5 seconds
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(function() {
+            window.location.href = "{% url 'user_dashboard' %}";
+        }, 5000);
+    });
+</script>
+{% endblock %}

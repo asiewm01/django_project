@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Book Details
+{% endblock %}
+
+{% block content %}
+<style>
+    .book-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .book-image {
+        flex: 1 1 30%;
+        max-width: 30%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        background-color: #f9f9f9;
+    }
+
+    .book-image img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .book-info {
+        flex: 1 1 60%;
+        max-width: 60%;
+        padding: 20px;
+    }
+
+    .book-info h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .book-info p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .book-info .availability {
+        font-weight: bold;
+        color: green;
+        margin-bottom: 20px;
+    }
+
+    .book-info .unavailable {
+        color: red;
+    }
+
+    .book-info button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .book-info button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    .book-info button:hover:not(:disabled) {
+        background-color: #0056b3;
+    }
+</style>
+
+<div class="book-container">
+    <div class="book-image">
+        {% if book.image %}
+            <img src="{{ book.image.url }}" alt="{{ book.title }}">
+        {% else %}
+            <img src="{% static 'book_pics/placeholder.jpg' %}" alt="Placeholder Image">
+        {% endif %}
+    </div>
+
+    <div class="book-info">
+        <h1>{{ book.title }}</h1>
+        <p><strong>Author:</strong> {{ book.author }}</p>
+        <p><strong>Genre:</strong> {{ book.genre }}</p>
+        <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+        <p><strong>Summary:</strong> {{ book.description }}</p>
+        <p>Available Copies: {{ book.available_copies }}</p>
+
+        <button 
+            id="checkout-button" 
+            onclick="redirectToCheckout('{% url 'checkout_book' book.id %}')"
+                {% if book.available_copies <= 0 %}disabled{% endif %}
+            title="{% if book.available_copies > 0 %}Check out or loan this book{% else %}This book is unavailable{% endif %}">
+                {% if book.available_copies > 0 %}Check Out / Loan{% else %}Unavailable{% endif %}
+        </button>
+
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ensure book.available_copies is passed as an integer, default to 0
+        const availableCopies = {{ book.available_copies|default:"0" }};
+        const button = document.getElementById("checkout-button");
+
+        // Debugging line to log the available copies in console
+        console.log("Available Copies: ", availableCopies);
+
+        // Check if button exists before making changes
+        if (button) {
+            // Change button text and disable/enable based on available copies
+            if (availableCopies <= 0) {
+                button.disabled = true;
+                button.textContent = "Unavailable";  // Change text to "Unavailable" when no copies are available
+                button.style.fontWeight = "bold";  // Optionally, make the text bold
+            } else {
+                button.disabled = false;
+                button.textContent = "Check Out";  // Change text to "Check Out" when copies are available
+                button.style.fontWeight = "normal";  // Reset text style when available
+            }
+
+            // Dynamically style the title
+            const titleElement = document.querySelector('.book-info h1');
+            titleElement.style.color = '#007bff';  // Highlight the title dynamically
+        } else {
+            console.error("Checkout button not found.");
+        }
+    });
+
+    function redirectToCheckout(url) {
+        try {
+            if (!url) throw new Error("Invalid URL");
+            window.location.href = url;
+        } catch (error) {
+            console.error("Error in redirectToCheckout:", error.message);
+        }
+    }
+</script>
+
+{% endblock %}

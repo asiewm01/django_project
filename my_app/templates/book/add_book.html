@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add a New Book
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Internal CSS for Add Book Page */
+    .add-book-container {
+        max-width: 500px;
+        margin: 50px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-book-container h1 {
+        font-size: 2rem;
+        color: #444;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .add-book-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .add-book-container form button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .add-book-container form button:hover {
+        background-color: #218838;
+    }
+
+    .add-book-container a {
+        display: inline-block;
+        margin-top: 20px;
+        text-align: center;
+        color: #007bff;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .add-book-container a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="add-book-container">
+    <h1>Add a New Book</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add Book</button>
+    </form>
+    <a href="{% url 'book_search' %}">Back to Search</a>
+</div>
+
+<script>
+    // Internal JavaScript for Add Book Page
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("Add Book Page Loaded");
+    });
+</script>
+{% endblock %}

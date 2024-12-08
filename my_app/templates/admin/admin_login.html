@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Internal CSS for Login Form */
+    form {
+        background: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center align content */
+    }
+
+    form h2 {
+        text-align: center;
+        color: #444;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+
+    form input[type="text"], 
+    form input[type="password"], 
+    form input[type="email"] {
+        width: 90%; /* Set input width relative to the form */
+        max-width: 350px; /* Limit maximum width */
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
+
+    form button {
+        width: 90%; /* Match input width */
+        max-width: 350px; /* Limit maximum width */
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+        background-color: #0056b3;
+    }
+
+    form p {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    form p a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    form p a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<h2>Admin Login</h2>
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" class="form-control">
+    </div>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<script>
+    // Internal JavaScript for Login Page
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("Login Page Loaded");
+    });
+</script>
+{% endblock %}

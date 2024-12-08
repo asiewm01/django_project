@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}
+User Dashboard
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Internal CSS for User Dashboard */
+    .dashboard-container {
+        display: flex;
+        height: calc(100vh - 40px); /* Adjust for footer height */
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .sidebar a {
+        color: #ecf0f1;
+        text-decoration: none;
+        padding: 10px 15px;
+        margin: 5px 0;
+        display: block;
+        border-radius: 4px;
+    }
+
+    .sidebar a:hover {
+        background-color: #34495e;
+    }
+
+    .main-content {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background-color: #ffffff;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .header h1 {
+        margin: 0;
+    }
+
+    .card {
+        background-color: #ecf0f1;
+        padding: 20px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h2 {
+        margin-top: 0;
+    }
+
+    .card table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .card table, .card th, .card td {
+        border: 1px solid #bdc3c7;
+    }
+
+    .card th, .card td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .card th {
+        background-color: #3498db;
+        color: white;
+    }
+
+    .card button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #3498db;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .card button:hover {
+        background-color: #2980b9;
+    }
+</style>
+
+<div class="dashboard-container">
+    <div class="sidebar">
+        <div>
+            <h2>Dashboard</h2>
+            <a href="{% url 'user_profile' %}">My Profile</a> 
+            <a href="{% url 'user_book_loan' %}">Book Loans</a>
+            <a href="{% url 'user_book_fine' %}">Financial Statement</a>
+        </div>
+        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" style="background: none; border: none; color: white; cursor: pointer;">
+                Logout
+            </button>
+        </form>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>Welcome, {{ user.first_name }}!</h1>
+        </div>
+
+        <div class="card" id="book-loans">
+            <h2>Your Book Loans</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Book Title</th>
+                        <th>Loan Date</th>
+                        <th>Due Date</th>
+                        <th>Return Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for loan in loans %}
+                    <tr>
+                        <td>{{ loan.book.title }}</td>
+                        <td>{{ loan.loan_date }}</td>
+                        <td>{{ loan.due_date }}</td>
+                        <td>{{ loan.return_date|default:"Not Returned" }}</td>
+                        <td>
+                            {% if loan.due_date < today_date %}
+                                <span style="color: red;">Overdue</span>
+                            {% else %}
+                                <span style="color: green;">On Time</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No books currently on loan.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

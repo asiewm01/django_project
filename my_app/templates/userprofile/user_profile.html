@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+User Profile
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Internal CSS for User Profile */
+    .profile-card {
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+    }
+
+    .profile-pic, .profile-details, .contact-details {
+        flex: 1;
+        padding: 10px;
+    }
+
+    .profile-pic {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-pic img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .profile-pic button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .profile-pic button:hover {
+        background-color: #0056b3;
+    }
+
+    .profile-details, .contact-details {
+        margin-left: 10px;
+    }
+
+    .profile-details label, .contact-details label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .profile-details input[type="text"],
+    .profile-details input[type="date"],
+    .contact-details input[type="email"],
+    .contact-details input[type="tel"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+    }
+
+    /* Styling buttons */
+    .contact-details button[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    
+    .back-to-dashboard {
+        width: 95%; /* Adjust this percentage as needed */
+        padding: 10px;
+        background-color: #f39c12;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .contact-details button[type="submit"] {
+        background-color: #28a745;
+        color: white;
+        border: none;
+    }
+
+    .contact-details button[type="submit"]:hover {
+        background-color: #218838;
+    }
+
+    .back-to-dashboard {
+        background-color: #f39c12;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .back-to-dashboard:hover {
+        background-color: #e67e22;
+    }
+
+    /* Ensure both buttons are aligned properly */
+    .contact-details form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .contact-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+</style>
+
+
+<h1>{{ user.first_name }}'s User Profile</h1>
+<div class="profile-card">
+    <!-- Profile Picture Column -->
+    <div class="profile-pic">
+        <img id="profileImage" src="{% static 'profile_pics/profile_picture_placeholder.jpg' %}" alt="Profile Picture">
+        <input type="file" id="uploadImage" accept="image/*" hidden>
+        <button id="changePicture">Change Picture</button>
+    </div>
+
+    <!-- Personal Details Column -->
+    <div class="profile-details">
+        <form id="updateProfileForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="first_name" value="{{ user.first_name }}" placeholder="Enter First Name">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="last_name" value="{{ user.last_name }}" placeholder="Enter Last Name">
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth:</label>
+                <input type="date" id="dateOfBirth" name="date_of_birth" value="{{ user.profile.date_of_birth|date:'Y-m-d' }}">
+            </div>
+        </form>
+    </div>
+
+    <!-- Contact Details Column -->
+    <div class="contact-details">
+        <form id="updateProfileForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" placeholder="Enter Email">
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="tel" id="phoneNumber" name="phone_number" value="{{ user.profile.phone_number }}" placeholder="Enter Phone Number">
+            </div>
+            <button type="submit" id="updateButton">Update Profile</button>
+        </form>
+    
+        <!-- Back to Dashboard Button -->
+        <a href="{% url 'user_dashboard' %}" class="back-to-dashboard">Back to Dashboard</a>
+    </div>
+
+<script>
+    document.getElementById('changePicture').addEventListener('click', () => {
+        document.getElementById('uploadImage').click();
+    });
+
+    document.getElementById('uploadImage').addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('profileImage').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('updateProfileForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        console.log('Profile Updated:', {
+            firstName: formData.get('first_name'),
+            lastName: formData.get('last_name'),
+            dateOfBirth: formData.get('date_of_birth'),
+            email: formData.get('email'),
+            phoneNumber: formData.get('phone_number')
+        });
+        alert('Profile updated successfully!');
+    });
+</script>
+
+{% endblock %}

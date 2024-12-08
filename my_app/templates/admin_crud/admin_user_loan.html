@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Loan Details for {{ user.first_name }} {{ user.last_name }}</h1>
+    
+    <!-- Bulk Email Buttons -->
+    <div style="margin-bottom: 20px; text-align: center;">
+        <form method="post" action="{% url 'send_bulk_emails' %}" style="display: inline-block; margin-right: 10px;">
+            {% csrf_token %}
+            <button type="submit">Send Email to Unpaid Loans</button>
+        </form>
+
+        <form method="post" action="{% url 'send_bulk_not_returned_emails' %}" style="display: inline-block; margin-right: 10px;">
+            {% csrf_token %}
+            <button type="submit">Send Email to Not Returned Loans</button>
+        </form>
+
+        <!-- 2-Week Reminder Form -->
+        <form method="post" action="{% url 'send_due_date_reminder' %}" style="display: inline-block; margin-right: 10px;">
+            {% csrf_token %}
+            <button type="submit">Send 2-Week Reminder</button>
+        </form>
+    </div>
+
+    <style>
+        /* General Page Styling */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        /* Alternating row colors for better readability */
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #e1f7e1; /* Highlight on hover */
+        }
+
+        /* Highlight overdue loans */
+        .overdue {
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        /* Highlight returned loans */
+        .returned {
+            color: #5bc0de;
+            font-weight: bold;
+        }
+    </style>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Loan Date</th>
+                <th>Due Date</th>
+                <th>Return Date</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in loans %}
+                <tr>
+                    <td>{{ loan.book.title }}</td>
+                    <td>{{ loan.loan_date|date:"M d, Y" }}</td>
+                    <td>{{ loan.due_date|date:"M d, Y" }}</td>
+                    <td>{{ loan.return_date|date:"M d, Y" }}</td>
+                    <td>
+                        {% if loan.return_date %}
+                            <span class="returned">Returned</span>
+                        {% elif loan.due_date < today %}
+                            <span class="overdue">Overdue</span>
+                        {% else %}
+                            On Time
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

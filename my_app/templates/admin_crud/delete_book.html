@@ -1,0 +1,15 @@
+<!-- my_app/templates/delete_book.html -->
+{% extends 'base.html' %}
+
+{% block title %}Delete Book{% endblock %}
+
+{% block content %}
+<h1>Are you sure you want to delete the book: {{ book.title }}?</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a href="{% url 'book_management' %}">Cancel</a>
+{% endblock %}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Silent Library</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Internal CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .banner {
+        font-size: 1.5rem;
+      }
+
+      .contactpage {
+        margin-top: 20px;
+      }
+
+      .contact-form label {
+        font-weight: bold;
+      }
+
+      .topnav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .footer-links a {
+        text-decoration: none;
+        color: white;
+      }
+
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+
+      iframe {
+        border: none;
+      }
+
+      .accordion .ui-accordion-content {
+        padding: 10px;
+        background-color: #f8f9fa;
+      }
+
+      footer {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #343a40;
+      }
+      
+      .footer-icons a {
+        margin-right: 15px;
+        color: white;
+        font-size: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Contact Page Banner -->
+    <div class="contactpage">
+      <div class="container-fluid p-5 bg-primary text-white text-center">
+        <h1 class="banner">Contact Us!</h1>
+        <p class="banner">Get in touch with Silent Library through our Contact Us section. Whether you have questions, need assistance, or want to provide feedback, you can find all the information you need to reach out to us.</p>
+        <p class="banner">Access our phone numbers, email addresses, and online contact forms to connect with our staff. We’re here to help and look forward to hearing from you!</p>
+      </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="container mt-3">
+      <div class="row">
+        <div class="col-sm-4">
+          <h2 class="mb-3"><u>Fill in the form below!</u></h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-5 contact-form">
+          <form>
+            <div class="mb-3">
+              <label for="nameInput" class="form-label">Name</label>
+              <input type="text" class="form-control" id="nameInput" placeholder="Aegon Targaryen">
+            </div>
+            <div class="mb-3">
+              <label for="emailInput" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="emailInput" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+              <label for="telInput" class="form-label">Telephone Number</label>
+              <input type="tel" class="form-control" id="telInput" placeholder="+6592702017">
+            </div>
+            <div class="mb-3">
+              <label for="messageTextarea" class="form-label">Send us a message! (drag at the right corner to expand)</label>
+              <textarea class="form-control" id="messageTextarea" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+
+        <!-- Accordion Section for Contact Info -->
+        <div class="col-sm-6">
+          <div id="accordion">
+            <h3>Contact Information</h3>
+            <div>
+              <ul>
+                <li>Phone: 92702017</li>
+                <li>Email: siewmj@gmail.com</li>
+              </ul>
+            </div>
+            <h3>Our Address Details</h3>
+            <div>
+              <ul>
+                <li>Street name: 100 Victoria Street</li>
+                <li>Building: National Library Building</li>
+                <li>Level: 14-01</li>
+                <li>Postal Code: Singapore 188064</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Google Map Embed -->
+          <div class="mt-3" style="border: 5px solid black; height: 300px;">
+            <iframe src="https://www.google.com/maps/embed/v1/place?q=National+Library+Board&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8"
+              style="height:100%; width:100%;" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h6 style="color: white;">About</h6>
+            <p class="text-justify" style="color: white;">At Silent Haven Libraries, we believe that the power of knowledge is best unlocked in the stillness of a peaceful environment. Step into a sanctuary where every page turn is a whisper, and every thought finds its space to breathe.</p>
+          </div>
+          <div class="col-md-3">
+            <h6 style="color: white;">Categories</h6>
+            <ul class="footer-links">
+              <li><a href="about.html" style="color: white;">About Us</a></li>
+              <li><a href="contact_us.html" style="color: white;">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h6 style="color: white;">Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="privacy_policy.html" style="color: white;">Privacy Policy</a></li>
+              <li><a href="sitemap.html" style="color: white;">Sitemap</a></li>
+              <li><a href="term_and_condition.html" style="color: white;">Terms & Conditions</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text" style="color: white;">Copyright &copy; 2024 All Rights Reserved by <u>Silent Library</u>.</p>
+          </div>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="footer-icons">
+              <li><a href="https://www.facebook.com/" class="facebook" style="color: white;"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="https://www.instagram.com/" class="instagram" style="color: white;"><i class="fa fa-instagram"></i></a></li>
+              <li><a href="https://www.youtube.com/" class="youtube" style="color: white;"><i class="fa fa-youtube"></i></a></li>
+              <li><a href="https://www.linkedin.com/" class="linkedin" style="color: white;"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#accordion").accordion({
+          heightStyle: "content"
+        });
+      });
+    </script>
+  </body>
+</html>

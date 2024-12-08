@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>User Management</h1>
+    <style>
+        /* General Page Styling */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        /* Alternating row colors for better readability */
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #e1f7e1; /* Highlight on hover */
+        }
+
+        /* Fine Amount Styling */
+        .fine-amount {
+            color: #d9534f; /* Red color for overdue fines */
+            font-weight: bold;
+        }
+
+        /* Block message for overdue fines */
+        .no-loans-message {
+            color: #d9534f;
+            font-weight: bold;
+        }
+    </style>
+
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Book Loans</th>
+                <th>Overdue Fines</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in user_data %}
+            <tr>
+                <td>{{ entry.user.username }}</td>
+                <td>{{ entry.user.first_name }}</td>
+                <td>{{ entry.user.last_name }}</td>
+                <td>
+                    {% if entry.loans.count > 0 %}
+                        <a href="{% url 'admin_user_loan' user_id=entry.user.id loan_id=entry.loans.first.id %}">View Loan</a>
+                    {% else %}
+                        No Loans
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entry.fines.count > 0 %}
+                        <a href="{% url 'admin_user_fine' entry.user.id %}">View Fine</a>
+                    {% else %}
+                        No Fines
+                    {% endif %}
+                    {% if entry.fines.count > 2 %}
+                        <p class="no-loans-message">Cannot borrow more books until fines are paid.</p>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

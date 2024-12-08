@@ -1,0 +1,89 @@
+<!-- my_app/templates/edit_book.html -->
+{% extends 'base.html' %}
+
+{% block title %}Edit Book{% endblock %}
+
+{% block content %}
+<h1>Edit Book: {{ book.title }}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+
+    <div class="form-group">
+        <label for="book_image">Book Cover Image:</label>
+        <input type="file" name="book_image" id="book_image" class="form-control">
+        {% if book.image %}
+        <div class="current-image">
+            <p>Current Image:</p>
+            <img src="{{ book.image.url }}" alt="Current book cover" width="100">
+        </div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn-submit">Update Book</button>
+</form>
+
+{% block extra_css %}
+<style>
+    /* Form Styling */
+    h1 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="date"],
+    .form-group input[type="number"],
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .form-group input[type="file"] {
+        padding: 10px;
+    }
+
+    .current-image {
+        margin-top: 20px;
+    }
+
+    .current-image img {
+        display: block;
+        max-width: 100px;
+        margin-top: 10px;
+    }
+
+    .btn-submit {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-submit:hover {
+        background-color: #45a049;
+    }
+
+</style>
+{% endblock %}
+{% endblock %}

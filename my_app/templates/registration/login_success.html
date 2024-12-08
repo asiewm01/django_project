@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login Successful
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Internal CSS for Login Success Page */
+    .login-success-container {
+        max-width: 600px;
+        margin: 50px auto;
+        text-align: center;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-success-container h1 {
+        font-size: 2.5rem;
+        color: #444;
+        margin-bottom: 15px;
+    }
+
+    .login-success-container p {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .dashboard-link {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    .dashboard-link:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+    <h1>Welcome back, {{ user.first_name }}!</h1>
+    <p>You have successfully logged in.</p>
+    <a href="{% url 'user_dashboard' %}" class="dashboard-link">Go to Dashboard</a>
+
+<script>
+    // Internal JavaScript for the Login Success Page
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("Login Success Page Loaded for {{ user.first_name }}");
+    });
+</script>
+{% endblock %}

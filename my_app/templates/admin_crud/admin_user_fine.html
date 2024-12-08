@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Fine Details for {{ user.first_name }} {{ user.last_name }}</h1>
+    <style>
+        /* General Page Styling */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #fff;
+        }
+
+        /* Alternating row colors for better readability */
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover td {
+            background-color: #e1f7e1; /* Highlight on hover */
+        }
+
+        /* Highlight overdue fines */
+        .overdue-fine {
+            color: #d9534f;
+            font-weight: bold;
+        }
+    </style>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Fine Amount</th>
+                <th>Due Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fine in fines %}
+                <tr>
+                    <td>{{ fine.amount }} USD</td>
+                    <td>{{ fine.due_date }}</td>
+                    <td>
+                        {% if fine.due_date < today %}
+                            <span class="overdue-fine">Overdue</span>
+                        {% else %}
+                            On Time
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
